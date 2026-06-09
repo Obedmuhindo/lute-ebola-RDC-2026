@@ -45,10 +45,10 @@
     <script type="text/babel" data-presets="react">
         const { useState, useRef, useEffect } = React;
 
-        // Chemins vers vos images (doivent être dans le même dossier sur GitHub)
+        // Chemins vers vos images via GitHub Raw URLs
         const ASSETS = {
-            logo: 'logo.png',
-            filter: 'filtre.png'
+            logo: 'https://raw.githubusercontent.com/Obedmuhindo/lute-ebola-RDC-2026/main/Logo.png',
+            filter: 'https://raw.githubusercontent.com/Obedmuhindo/lute-ebola-RDC-2026/main/Filtre.png'
         };
 
         // Composant Icône SVG simple pour éviter les conflits DOM
@@ -228,7 +228,7 @@
                     return;
                 }
 
-                const message = `Bonjour ! 👋\n\nFace à l'urgence de l'épidémie d'Ebola en RDC, engageons-nous avec le Ministère de la Santé et l'Institut National de Santé Publique (INSP) pour limiter sa propagation en adoptant des mesures préventives strictes :\n\n💧 Lavez-vous régulièrement les mains à l'eau propre et au savon ou avec une solution hydroalcoolique.\n🚫 Évitez tout contact physique direct avec une personne malade ou présentant des symptômes (fièvre, fatigue intense, douleurs, vomissements, diarrhées).\n⚠️ Ne touchez pas le corps d'une personne décédée de cause suspecte (laissez faire les équipes de santé d'inhumation sécurisée).\n🏥 Contactez immédiatement le centre de santé le plus proche dès l'apparition des premiers symptômes.\n\nJe viens de générer mon visuel d'engagement, faites comme moi et soutenez la campagne d'adoption des gestes barrières :\n👉 https://bit.ly/stop-ebola-rdc-2026\n\nEnsemble, brisons la chaîne de transmission. 🇨🇩`;
+                const message = `Bonjour ! 👋\n\nFace à l'urgence de l'épidémie d'Ebola en RDC, engageons-nous avec le Ministère de la Santé et l'Institut National de Santé Publique (INSP) pour barrer la route à cette maladie.\n\n✅ Générez votre filtre d'engagement\n✅ Partagez votre engagement\n✅ Ensemble, protégeons notre communauté\n\n🔗 Rejoignez-nous : #StopEbolaRDC\n\nhttps://obedmuhindo.github.io/lute-ebola-RDC-2026/`;
 
                 setIsExporting(true);
                 const canvas = canvasRef.current;
@@ -424,12 +424,12 @@
 
                             <div className="space-y-3 pt-2">
                                 <div className="flex gap-3">
-                                    <button onClick={resetControls} className="p-3 rounded-xl border-2 border-gray-200 text-gray-400 hover:bg-gray-50 transition-colors flex items-center justify-center">
+                                    <button onClick={resetControls} className="p-3 rounded-xl border-2 border-gray-200 text-gray-400 hover:bg-gray-50 transition-colors flex items-center justify-center" title="Réinitialiser">
                                         <Icon name="rotate" className="w-6 h-6" />
                                     </button>
                                     <button 
                                         onClick={() => fileInputRef.current.click()}
-                                        className="flex-1 flex items-center justify-center gap-2 py-3 px-2 rounded-xl border-2 border-pev-blue text-pev-blue font-bold hover:bg-pev-blue/5 transition-all uppercase text-[10px] xs:text-xs sm:text-sm"
+                                        className="flex-1 flex items-center justify-center gap-2 py-3 px-2 rounded-xl border-2 border-pev-blue text-pev-blue font-bold hover:bg-pev-blue/5 transition-all"
                                     >
                                         <Icon name="image" className="w-4 h-4 sm:w-5 sm:h-5" /> Ajouter votre photo
                                     </button>
@@ -438,7 +438,7 @@
                                 <button 
                                     onClick={handleDownload}
                                     disabled={!userImage || isExporting}
-                                    className="w-full flex items-center justify-center gap-2 py-4 px-4 rounded-xl bg-pev-orange text-white font-bold shadow-lg shadow-pev-orange/30 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:scale-100 transition-all uppercase text-sm"
+                                    className="w-full flex items-center justify-center gap-2 py-4 px-4 rounded-xl bg-pev-orange text-white font-bold shadow-lg shadow-pev-orange/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-transform"
                                 >
                                     {isExporting ? (
                                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -452,10 +452,10 @@
                             <button 
                                 onClick={handleShare}
                                 disabled={!userImage || isExporting}
-                                className="w-full flex items-center justify-center gap-3 py-4 px-4 rounded-xl bg-[#25D366] text-white font-bold shadow-lg shadow-green-200 hover:scale-[1.01] active:scale-95 disabled:opacity-50 transition-all uppercase text-sm mt-4"
+                                className="w-full flex items-center justify-center gap-3 py-4 px-4 rounded-xl bg-[#25D366] text-white font-bold shadow-lg shadow-green-200 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-transform"
                             >
                                 <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414 0 6.585-5.396 11.954-11.968 11.954h-.005c-1.99 0-3.951-.523-5.694-1.524l-6.384 2.107z"/>
                                 </svg>
                                 Partager sur WhatsApp
                             </button>
