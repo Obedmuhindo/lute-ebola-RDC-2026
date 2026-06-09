@@ -83,15 +83,13 @@
             const fileInputRef = useRef(null);
             const previewRef = useRef(null);
 
-            // Correction du scroll sur mobile : on attache l'événement touchmove de manière non-passive
-            // pour pouvoir appeler preventDefault() seulement quand on glisse l'image.
+            // Correction du scroll sur mobile
             useEffect(() => {
                 const preview = previewRef.current;
                 if (!preview) return;
 
                 const handleTouchMove = (e) => {
                     if (isDragging && userImage) {
-                        // On empêche le scroll de la page seulement si on est en train de manipuler l'image
                         if (e.cancelable) e.preventDefault();
                     }
                 };
@@ -125,7 +123,6 @@
                 const deltaX = clientX - dragStart.x;
                 const deltaY = clientY - dragStart.y;
 
-                // On ajuste le déplacement par le zoom pour que l'image suive exactement le doigt/souris
                 setPosX(prev => prev + deltaX / zoom);
                 setPosY(prev => prev + deltaY / zoom);
                 setDragStart({ x: clientX, y: clientY });
@@ -167,24 +164,15 @@
                     const previewWidth = previewRef.current.clientWidth || 400;
                     const scaleFactor = 1080 / previewWidth;
 
-                    // On utilise les transformations du canvas pour matcher exactement le CSS
                     ctx.save();
-                    
-                    // 1. On se place au centre du canvas
                     ctx.translate(540, 540);
-                    
-                    // 2. On applique le zoom (scale)
                     ctx.scale(zoom, zoom);
-                    
-                    // 3. On applique le déplacement (translate) converti à l'échelle du canvas
                     ctx.translate(posX * scaleFactor, posY * scaleFactor);
 
-                    // 4. On calcule la taille de base pour l'effet "object-cover"
                     const baseScale = Math.max(1080 / img.width, 1080 / img.height);
                     const drawWidth = img.width * baseScale;
                     const drawHeight = img.height * baseScale;
                     
-                    // 5. On dessine l'image centrée (le scale et translate s'occupent du reste)
                     ctx.imageSmoothingEnabled = true;
                     ctx.imageSmoothingQuality = 'high';
                     ctx.drawImage(img, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
@@ -228,7 +216,7 @@
                     return;
                 }
 
-                const message = `Bonjour ! 👋\n\nFace à l'urgence de l'épidémie d'Ebola en RDC, engageons-nous avec le Ministère de la Santé et l'Institut National de Santé Publique (INSP) pour barrer la route à cette maladie.\n\n✅ Générez votre filtre d'engagement\n✅ Partagez votre engagement\n✅ Ensemble, protégeons notre communauté\n\n🔗 Rejoignez-nous : #StopEbolaRDC\n\nhttps://obedmuhindo.github.io/lute-ebola-RDC-2026/`;
+                const message = `Bonjour ! 👋\n\nFace à l'urgence de l'épidémie d'Ebola en RDC, engageons-nous avec le Ministère de la Santé et l'Institut National de Santé Publique (INSP) pour barrer la route à cette maladie.\n\n✅ Générez votre filtre d'engagement\n✅ Partagez votre engagement\n✅ Ensemble, protégeons notre communauté\n\n🔗 #StopEbolaRDC`;
 
                 setIsExporting(true);
                 const canvas = canvasRef.current;
@@ -237,7 +225,6 @@
                 canvas.height = 1080;
 
                 try {
-                    // Génération de l'image (même logique que download)
                     ctx.clearRect(0, 0, 1080, 1080);
                     const img = new Image();
                     img.src = userImage;
@@ -260,14 +247,16 @@
 
                     const filterImg = new Image();
                     filterImg.src = ASSETS.filter;
-                    await new Promise((resolve) => { filterImg.onload = resolve; filterImg.onerror = () => resolve(null); });
+                    await new Promise((resolve) => { 
+                        filterImg.onload = resolve; 
+                        filterImg.onerror = () => resolve(null); 
+                    });
                     if (filterImg.complete && filterImg.naturalWidth > 0) {
                         ctx.drawImage(filterImg, 0, 0, 1080, 1080);
                     }
 
                     const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
 
-                    // Déclenchement du téléchargement automatique (comme le bouton télécharger)
                     const downloadLink = document.createElement('a');
                     downloadLink.style.display = 'none';
                     document.body.appendChild(downloadLink);
@@ -275,7 +264,6 @@
                     downloadLink.href = dataUrl;
                     downloadLink.click();
                     
-                    // On laisse un petit délai avant de retirer le lien pour certains navigateurs mobiles
                     setTimeout(() => {
                         document.body.removeChild(downloadLink);
                     }, 100);
@@ -283,7 +271,6 @@
                     const blob = await (await fetch(dataUrl)).blob();
                     const file = new File([blob], 'StopEbolaRDC.jpg', { type: 'image/jpeg' });
 
-                    // Tentative de partage natif (Image + Texte)
                     if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
                         await navigator.share({
                             files: [file],
@@ -291,7 +278,6 @@
                             title: '#StopEbolaRDC'
                         });
                     } else {
-                        // Fallback WhatsApp texte seulement
                         const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
                         window.open(waUrl, '_blank');
                     }
@@ -313,7 +299,6 @@
             return (
                 <div className="min-h-screen flex flex-col items-center bg-gray-50 pb-12">
                     <header className="w-full bg-white shadow-md py-6 px-4 flex flex-col items-center space-y-4 border-b-4 border-pev-blue relative overflow-hidden">
-                        {/* Décorations subtiles en arrière-plan */}
                         <div className="absolute top-0 right-0 w-32 h-32 bg-pev-orange/5 rounded-full -mr-16 -mt-16"></div>
                         <div className="absolute bottom-0 left-0 w-24 h-24 bg-pev-blue/5 rounded-full -ml-12 -mb-12"></div>
                         
@@ -448,7 +433,6 @@
                                 </button>
                             </div>
 
-                            {/* Bouton Partager sur WhatsApp */}
                             <button 
                                 onClick={handleShare}
                                 disabled={!userImage || isExporting}
