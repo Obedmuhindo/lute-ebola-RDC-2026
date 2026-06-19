@@ -56,7 +56,7 @@
             const icons = {
                 upload: <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m14-7-5-5-5 5m5-5v12"/>,
                 zoom: <React.Fragment><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></React.Fragment>,
-                move: <React.Fragment><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="22"/></React.Fragment>,
+                move: <React.Fragment><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" x2="22" y1="12" y2="12"/></React.Fragment>,
                 rotate: <React.Fragment><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></React.Fragment>,
                 image: <React.Fragment><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></React.Fragment>,
                 download: <React.Fragment><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m7-10 5 5-5 5m5-5H3"/></React.Fragment>
@@ -254,11 +254,11 @@
 
                 const message = `Bonjour à toutes et à tous 🙌🏾
 
-Face à l’épidémie d’Ebola en RDC, mobilisons-nous aux côtés du Ministère de la Santé et de l’Institut National de Santé Publique (INSP) pour limiter la propagation de cette maladie dans nos communautés.
+Face à l'épidémie d'Ebola en RDC, mobilisons-nous aux côtés du Ministère de la Santé et de l'Institut National de Santé Publique (INSP) pour limiter la propagation de cette maladie dans [...]
 
-Je viens de créer mon filtre d’engagement. Vous aussi, créez le vôtre et partagez-le pour sensibiliser votre entourage.
+Je viens de créer mon filtre d'engagement. Vous aussi, créez le vôtre et partagez-le pour sensibiliser votre entourage.
 
-✅ Créez votre filtre d’engagement
+✅ Créez votre filtre d'engagement
 ✅ Partagez votre message de prévention
 ✅ Invitons chacun à protéger sa famille et sa communauté
 
@@ -465,7 +465,7 @@ Prévenons. Protégeons. Agissons.`;
 
                             <div className="space-y-3 pt-2">
                                 <div className="flex gap-3">
-                                    <button onClick={resetControls} className="p-3 rounded-xl border-2 border-gray-200 text-gray-400 hover:bg-gray-50 transition-colors flex items-center justify-center" title="Réinitialiser">
+                                    <button onClick={resetControls} className="p-3 rounded-xl border-2 border-gray-200 text-gray-400 hover:bg-gray-50 transition-colors flex items-center justify-center">
                                         <Icon name="rotate" className="w-6 h-6" />
                                     </button>
                                     <button 
@@ -479,7 +479,7 @@ Prévenons. Protégeons. Agissons.`;
                                 <button 
                                     onClick={handleDownload}
                                     disabled={!userImage || isExporting}
-                                    className="w-full flex items-center justify-center gap-2 py-4 px-4 rounded-xl bg-pev-orange text-white font-bold shadow-lg shadow-pev-orange/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-transform"
+                                    className="w-full flex items-center justify-center gap-2 py-4 px-4 rounded-xl bg-pev-orange text-white font-bold shadow-lg shadow-pev-orange/30 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-transform"
                                 >
                                     {isExporting ? (
                                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -493,10 +493,10 @@ Prévenons. Protégeons. Agissons.`;
                             <button 
                                 onClick={handleShare}
                                 disabled={!userImage || isExporting}
-                                className="w-full flex items-center justify-center gap-3 py-4 px-4 rounded-xl bg-[#25D366] text-white font-bold shadow-lg shadow-green-200 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-transform"
+                                className="w-full flex items-center justify-center gap-3 py-4 px-4 rounded-xl bg-[#25D366] text-white font-bold shadow-lg shadow-green-200 hover:scale-[1.01] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-transform"
                             >
                                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12.031 2a9.978 9.978 0 0 0-9.971 9.97c0 1.956.564 3.778 1.533 5.317L2 22l4.89-1.272A9.913 9.913 0 0 0 12.03 21a9.978 9.978 0 0 0 9.971-9.97A9.978 9.978 0 0 0 12.03 2zm-.029 1.688c4.549 0 8.245 3.696 8.245 8.282a8.216 8.216 0 0 1-8.245 8.281 8.255 8.255 0 0 1-4.223-1.16l-.303-.18-3.13.814.828-3.048-.198-.314a8.232 8.232 0 0 1-1.219-4.393c0-4.586 3.696-8.282 8.245-8.282zM8.342 6.777c-.161 0-.367.042-.544.207-.176.165-.676.66-.676 1.611 0 .95 1.01 1.87 1.151 2.057.142.186 1.942 3.125 4.814 4.254.683.268 1.217.428 1.631.543.687.21 1.312.18 1.805.111.55-.077 1.693-.681 1.93-1.338.236-.657.236-1.22.164-1.338-.071-.118-.268-.186-.56-.328-.291-.143-1.724-.836-1.99-.933-.266-.097-.46-.145-.658.144-.197.29-.763.933-.935 1.127-.172.193-.344.218-.636.075-.29-.143-1.23-.444-2.343-1.422-.866-.76-1.45-1.7-1.622-1.99-.172-.29-.018-.447.128-.59.13-.13.29-.338.437-.508.146-.17.195-.29.292-.483.097-.193.048-.363-.024-.508-.073-.145-.658-1.573-.902-2.153-.238-.567-.481-.49-.658-.499l-.56-.007z"/>
+                                    <path d="M12.031 2a9.978 9.978 0 0 0-9.971 9.97c0 1.956.564 3.778 1.533 5.317L2 22l4.89-1.272A9.913 9.913 0 0 0 12.03 21a9.978 9.978 0 0 0 9.971-9.97A9.978 9.978 0 0 0 12.031 2m6.604 14.866c-.304.862-.884 1.648-1.707 2.24-.823.59-1.87.905-2.917.905-1.047 0-2.093-.315-2.917-.905-.823-.592-1.403-1.378-1.707-2.24a6.744 6.744 0 0 1-.397-2.096 6.794 6.794 0 0 1 1.978-4.87 6.998 6.998 0 0 1 4.842-2.007 6.998 6.998 0 0 1 4.842 2.007 6.794 6.794 0 0 1 1.978 4.87 6.744 6.744 0 0 1-.397 2.096z"/>
                                 </svg>
                                 Partager sur WhatsApp
                             </button>
